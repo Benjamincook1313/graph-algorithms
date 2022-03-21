@@ -1,11 +1,22 @@
 const undirectedPath = (edges, node1, node2) => {
   const graph = buildGraph(edges)
   console.log(buildGraph(edges))
-  return hasPath(graph, node1, node2)
+  return hasPath(graph, node1, node2, new Set())
 };
 
-const hasPath = (graph, src, dst) => {
-  
+const hasPath = (graph, src, dst, visited) => {
+  if(src === dst) return true
+  if(visited.has(src)) return true
+
+  visited.add(src)
+
+  for(let neighbor of graph[src]){
+    if(hasPath(graph, neighbor, dst, visited) === true){
+      return true
+    }
+  }
+
+  return false
 };
 
 const buildGraph = (edges) => {
