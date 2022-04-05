@@ -1,9 +1,8 @@
 const connectedComponentsCount = (graph) => {
-  const visited = new Set()
   let count = 0
+  const visited = new Set()
 
   for(let node in graph){
-    console.log(visited)
     if(explore(graph, node, visited) === true) {
       count += 1
     }
@@ -34,4 +33,4 @@ const graph = {
   4: [3, 2]
 }
 
-connectedComponentsCount(graph)
+console.log(connectedComponentsCount(graph))

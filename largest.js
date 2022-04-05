@@ -1,23 +1,22 @@
 const largestComponent = (graph) => {
-  const visited = new Set()
-  let longest = 0
-  
-  for(let node in graph){
-    const size = exploreSize(graph, node, visited)
-    if(size > longest) longest = size
-  }
+  let largest = 0
 
-  return longest
+  for(let node in graph){
+    const size = exploreSize(graph, node, new Set()) 
+      if(size > largest) largest = size 
+  }
+  return largest
 };
 
-const exploreSize = (graph, node, visited) => {
-  if(visited.has(node)) return 0 
+const exploreSize = (graph, current, visited) => {
+  if(visited.has(current)) return 0
+  visited.add(current)
 
-  visited.add(node)
-  
   let size = 1
-  for(let neighbor of graph[node]) {
+
+  for(let neighbor of graph[current]){
     size += exploreSize(graph, neighbor, visited)
+    
   }
 
   return size
@@ -33,4 +32,4 @@ const graph = {
   4: [3, 2]
 };
 
-largestComponent(graph)
+console.log(largestComponent(graph)) // 4
