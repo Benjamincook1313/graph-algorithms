@@ -1,16 +1,33 @@
 
-const dijkstra = (graph, src, dest) => {
+
+const dijkstra = (graph, src) => {
+  const shortestPath = newGraph(graph)
   const queue = [ [src, 0] ]
-  const visited = new Set([src])
+  const visited = new Set( [src,0] )
 
   while (queue.length > 0){
-    const [node, cost] = queue.shift()
-    if(node === dest)
-    for(let neighbor of graph[src]){
+    const [node, dist] = queue.shift()
+    for(let neighbor of graph[node]){
+      console.log(neighbor)
+      if(!(visited.has(neighbor))){
+        visited.add(neighbor)
+        queue.push(neighbor)
 
+        if(dist + shortestPath[totalCost] < shortestPath[node]){}
     }
   }
+  return shortestPath
+};
 
+const newGraph = (graph) => {
+  const obj = {}
+  for(let key in graph){
+    obj[key] = {
+      totalCost: Infinity,
+      prevNode: null
+    }
+  }
+  return obj
 };
 
 //      (Seattle) <-2-> (Chicago)
@@ -21,13 +38,13 @@ const dijkstra = (graph, src, dest) => {
 
 
 
-const graph = {
-  sf: { 'seattle': 3, 'idaho': 5 },
-  seattle: {'sf': 3, 'idaho': 1, 'chicago': 2},
-  idaho: {'sf': 5, 'seattle': 1, 'chicago': 3, 'nyc': 6},
-  chicago: {'seattle': 2, 'idaho': 3, 'nyc': 4},
-  nyc: {'idaho': 6, 'chicago': 4}
+const paths = {
+  sf: [ {'seattle': 3}, {'idaho': 5} ],
+  seattle: [ {'sf': 3}, {'idaho': 1}, {'chicago': 2} ],
+  idaho: [ {'sf': 5}, {'seattle': 1}, {'chicago': 3}, {'nyc': 6} ],
+  nyc: [ {'idaho': 6}, {'chicago': 4} ]
 };
 
 
-console.log(dijkstra(graph, 'sf', 'nyc')) // (sf: 3 -> seattle, seattle: 2 -> chicago, chicago: 4 -> nyc)
+console.log(dijkstra(paths, 'sf')) 
+// (sf: 3 -> seattle, seattle: 2 -> chicago, chicago: 4 -> nyc)

@@ -11,16 +11,19 @@ const islandCount = (grid) => {
 };
 
 const exploreSize = (grid, r, c, visited) => {
+  // check if we are inbounds of the grid
   const rowInbounds = 0 <= r && r < grid.length
   const colInbounds = 0 <= c && c < grid[0].length
   if(!rowInbounds || !colInbounds) return 0
   if(grid[r][c] === 'W') return 0
 
+  // get current position
   const pos = r + ',' + c
   if(visited.has(pos)) return 0
   visited.add(pos)
 
   let size = 1
+  // recursive access each item in the grid 
   size += exploreSize(grid, r-1, c, visited)
   size += exploreSize(grid, r+1, c, visited)
   size += exploreSize(grid, r, c-1, visited)

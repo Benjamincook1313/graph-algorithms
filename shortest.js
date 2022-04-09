@@ -9,7 +9,7 @@ const shortestPath = (edges, nodeA, nodeB) => {
     for(let neighbor of graph[node]){
       if(!visited.has(neighbor)){
         visited.add([neighbor])
-        queue.push([neighbor, dist + 1])
+        queue.push([neighbor, dist += 1])
       }
     }
   }
@@ -39,4 +39,4 @@ const edges = [
   ['w', 'v']
 ];
 
-console.log(shortestPath(edges, 'w', 'v'))
+console.log(shortestPath(edges, 'w', 'x'))
